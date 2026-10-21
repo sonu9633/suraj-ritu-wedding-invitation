@@ -15,6 +15,7 @@ export function Hero() {
   useEffect(() => { probe(IMG.arch).then((i) => setArch(!!i)); }, []);
   return (
     <header className="sec hero" id="hero">
+      <img className="ganesh" src="./images/ganesh.png" alt="Lord Ganesha" width={269} height={320} data-in />
       <div className="gan deva" data-in>॥ श्री गणेशाय नमः ॥</div>
       {IMG.heroArt ? (
         <div className="arch painted" data-in>
