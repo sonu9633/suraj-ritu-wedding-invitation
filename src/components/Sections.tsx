@@ -16,16 +16,25 @@ export function Hero() {
   return (
     <header className="sec hero" id="hero">
       <div className="gan deva" data-in>॥ श्री गणेशाय नमः ॥</div>
-      <div className={`arch${arch ? ' has-art' : ''}`} data-in>
-        <div className="arch-glow" />
-        <div className="arch-frame">
-          <div className="arch-in">
-            <img id="heroImg" src={IMG.couple1} alt="Ritu and Suraj in silhouette, foreheads touching, lit from behind" width={800} height={1200} fetchPriority="high" />
-            <div className="tint" />
+      {IMG.heroArt ? (
+        <div className="arch painted" data-in>
+          <div className="arch-glow" />
+          <div className="arch-frame">
+            <img id="heroImg" src={IMG.heroArt} alt="Ritu and Suraj in silhouette, foreheads touching, inside a flower-draped jharokha arch" width={1200} height={1600} fetchPriority="high" />
           </div>
         </div>
-        {arch && <img className="arch-art" src={IMG.arch} alt="" />}
-      </div>
+      ) : (
+        <div className={`arch${arch ? ' has-art' : ''}`} data-in>
+          <div className="arch-glow" />
+          <div className="arch-frame">
+            <div className="arch-in">
+              <img id="heroImg" src={IMG.couple1} alt="Ritu and Suraj in silhouette, foreheads touching, lit from behind" width={800} height={1200} fetchPriority="high" />
+              <div className="tint" />
+            </div>
+          </div>
+          {arch && <img className="arch-art" src={IMG.arch} alt="" />}
+        </div>
+      )}
       <h1 className="names">
         <span className="ln"><span data-in>Ritu<span className="sur">Kesarwani</span></span></span>
         <span className="amp" data-in>weds</span>
@@ -293,8 +302,8 @@ export function Families() {
 export function Finale() {
   return (
     <>
-      <section className="finale" id="end" aria-labelledby="end-h">
-        <div className="bg"><img data-par="10" src={IMG.couple2} alt="" width={1100} height={1650} loading="lazy" /></div>
+      <section className={`finale${IMG.finaleArt ? ' painted' : ''}`} id="end" aria-labelledby="end-h">
+        <div className="bg"><img data-par="6" src={IMG.finaleArt || IMG.couple2} alt="" width={1080} height={1920} loading="lazy" /></div>
         <div className="in">
           <p className="bless" data-rv>Come with your blessings. We will keep a seat warm for you.</p>
           <h2 className="nm" id="end-h" data-rv>Ritu<span className="sur">Kesarwani</span><span className="and">and</span>Suraj<span className="sur">Kesarwani</span></h2>

@@ -58,8 +58,8 @@ figure { margin: 0 }
 .flap .back { transform: rotateX(180deg); background: inherit; background-color: #4A1019; background-image: radial-gradient(circle, rgba(233, 184, 114, .45) 1.4px, transparent 1.8px), repeating-linear-gradient(45deg, rgba(233, 184, 114, .14) 0 1px, transparent 1px 13px), repeating-linear-gradient(-45deg, rgba(233, 184, 114, .14) 0 1px, transparent 1px 13px), linear-gradient(0deg, #6A1A26, #3A0C14); background-size: 18px 18px, auto, auto, 100% 100% }
 .lit { position: absolute; inset: 0; background-image: var(--glowp); background-size: 100% 100%; pointer-events: none;
   -webkit-mask-image: radial-gradient(circle at 50% 56%, #000 calc(var(--gr) - 14%), transparent var(--gr)); mask-image: radial-gradient(circle at 50% 56%, #000 calc(var(--gr) - 14%), transparent var(--gr)) }
-.gate.photo .lit { filter: sepia(1) saturate(5) hue-rotate(-12deg) brightness(1.08) contrast(1.35) }
-.copy { position: absolute; left: 0; right: 0; z-index: 5; text-align: center; color: var(--ink); pointer-events: none; padding: 14px max(24px, env(safe-area-inset-left, 0px)); background: radial-gradient(ellipse 60% 70% at 50% 50%, rgba(247, 243, 234, .92), rgba(247, 243, 234, .6) 60%, rgba(247, 243, 234, 0) 80%) }
+.gate.photo .lit { filter: sepia(.85) saturate(2.4) hue-rotate(-14deg) contrast(1.15); mix-blend-mode: multiply; opacity: .75 }
+.copy { position: absolute; left: 0; right: 0; z-index: 5; transform: translateZ(6px); text-align: center; color: var(--ink); pointer-events: none; padding: 14px max(24px, env(safe-area-inset-left, 0px)); background: radial-gradient(ellipse 60% 70% at 50% 50%, rgba(247, 243, 234, .92), rgba(247, 243, 234, .6) 60%, rgba(247, 243, 234, 0) 80%) }
 .copy.top { top: calc(56% - clamp(196px, 27vh, 244px)) }
 .copy .k { display: block; font-size: 13px; letter-spacing: .32em; text-transform: uppercase; color: var(--kesar-ink) }
 .copy .s { display: block; font-family: var(--script); font-style: italic; font-weight: 500; font-size: clamp(26px, 7vw, 38px); line-height: 1.15; margin-top: 4px }
@@ -67,8 +67,8 @@ figure { margin: 0 }
 .copy.bot p { font-family: var(--serif); font-style: italic; font-size: clamp(20px, 5.4vw, 24px); line-height: 1.35 }
 .copy.bot small { display: block; margin-top: 14px; font-size: 13px; letter-spacing: .3em; text-transform: uppercase; color: var(--muted) }
 .copy.bot small .deva { letter-spacing: 0; text-transform: none; font-size: 15px }
-.seal { position: absolute; left: 50%; top: 56%; z-index: 6; width: clamp(110px, 30vw, 150px); aspect-ratio: 1; margin: 0; padding: 0; border: 0; background: none; cursor: pointer; border-radius: 50%; translate: -50% -50% }
-.seal:disabled { cursor: progress }
+.seal { position: absolute; left: 50%; top: 56%; z-index: 6; width: clamp(110px, 30vw, 150px); aspect-ratio: 1; margin: 0; padding: 0; border: 0; background: none; cursor: pointer; border-radius: 50%; translate: -50% -50%; transform: translateZ(8px) }
+.seal[aria-busy="true"] { cursor: progress }
 .seal .half { position: absolute; inset: 0; display: block; transition: transform .35s var(--out) }
 .seal .half svg, .seal .half img { width: 100%; height: 100%; display: block; filter: drop-shadow(0 6px 10px rgba(60, 10, 10, .45)); user-select: none; -webkit-user-drag: none }
 .seal .h1 { clip-path: polygon(0 0, 52% 0, 47% 22%, 55% 40%, 46% 58%, 54% 76%, 49% 100%, 0 100%) }
@@ -261,3 +261,17 @@ main { position: relative; z-index: 1; overflow-x: clip }
 /* generated paper photo: cover instead of stretch (all layers share the same box, so they stay aligned) */
 .gate.photo .pocket, .gate.photo .lit { background-size: cover; background-position: center }
 .gate.photo .flap .front { background-size: 100% 100%, cover; background-position: center }
+
+/* ============ generated art ============ */
+.arch.painted { width: min(74vw, 40vh, 440px); aspect-ratio: 3/4 }
+.arch.painted .arch-frame { padding: 0; background: none; border-radius: 0; overflow: hidden;
+  -webkit-mask-image: radial-gradient(ellipse 72% 70% at 50% 48%, #000 62%, transparent 100%); mask-image: radial-gradient(ellipse 72% 70% at 50% 48%, #000 62%, transparent 100%) }
+.arch.painted .arch-frame img { width: 100%; height: 100%; object-fit: cover; display: block }
+.card-in img.sketch { width: 58%; aspect-ratio: 1; object-fit: contain; border-radius: 0; filter: none; box-shadow: none }
+.finale.painted .bg { inset: -4% 0 }
+.finale.painted .bg img { filter: none; mix-blend-mode: normal; opacity: 1; object-position: 50% 70% }
+.finale.painted::after { background: linear-gradient(180deg, var(--curtain) 0%, rgba(78, 17, 27, .82) 18%, rgba(78, 17, 27, .35) 45%, transparent 62%, rgba(40, 8, 14, .55) 88%, var(--curtain)) }
+.finale.painted { place-items: start center }
+.finale.painted .in { padding-top: clamp(64px, 10vh, 110px); gap: 14px }
+.finale.painted .nm { font-size: clamp(56px, 15vw, 104px) }
+.finale.painted .wait { position: relative; margin-top: 52vh; text-shadow: 0 2px 12px rgba(0, 0, 0, .7) }

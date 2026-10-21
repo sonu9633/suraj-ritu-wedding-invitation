@@ -13,6 +13,7 @@ export default function Envelope({ onOpen }: { onOpen: () => void }) {
   const root = useRef<HTMLDivElement>(null);
   const [art, setArt] = useState<{ paper: string; glow: string; photo: boolean; seal: string | null; liner: string | null } | null>(null);
   const opened = useRef(false);
+  const pending = useRef(false); // a tap that arrived before the paper finished loading
 
   // Paper: the generated photo if provided, else the procedural relief.
   useEffect(() => {
@@ -21,11 +22,12 @@ export default function Envelope({ onOpen }: { onOpen: () => void }) {
       if (!alive) return;
       const proc = p ? null : makePaper(innerWidth, innerHeight);
       setArt({
-        paper: p ? IMG.paper : proc!.paper,
-        glow: p ? IMG.paper : proc!.glow,
+        // absolute URLs: a url() inside a CSS variable resolves against the stylesheet, not the page
+        paper: p ? new URL(IMG.paper, document.baseURI).href : proc!.paper,
+        glow: p ? new URL(IMG.paper, document.baseURI).href : proc!.glow,
         photo: !!p,
-        seal: s ? IMG.seal : null,
-        liner: l ? IMG.liner : null,
+        seal: s ? new URL(IMG.seal, document.baseURI).href : null,
+        liner: l ? new URL(IMG.liner, document.baseURI).href : null,
       });
     });
     return () => { alive = false; };
@@ -51,7 +53,8 @@ export default function Envelope({ onOpen }: { onOpen: () => void }) {
   }, []);
 
   const open = () => {
-    if (opened.current || !art) return;
+    if (opened.current) return;
+    if (!art) { pending.current = true; return; }
     opened.current = true;
     const el = root.current!;
     const q = gsap.utils.selector(el);
@@ -79,6 +82,7 @@ export default function Envelope({ onOpen }: { onOpen: () => void }) {
       .to(q('.seal .h1'), { xPercent: -40, yPercent: 25, rotation: -22, opacity: 0, duration: 0.9, ease: 'power3.in' }, 1.0)
       .to(q('.seal .h2'), { xPercent: 40, yPercent: 30, rotation: 24, opacity: 0, duration: 0.9, ease: 'power3.in' }, 1.0)
       .to([svg, q('.halo')[0]], { opacity: 0, duration: 0.7, ease: 'power2.out' }, 1.45)
+      .to(q('.lit'), { opacity: 0, duration: 1.2, ease: 'power2.out' }, 1.5)
       // flap swings open on its hinge, the shadow it casts lifts
       .add(() => rustle(0, 0.8), 1.25)
       .to(q('.flap'), { rotationX: 180, duration: 1.05, ease: 'power2.inOut' }, 1.25)
@@ -102,6 +106,9 @@ export default function Envelope({ onOpen }: { onOpen: () => void }) {
       }, 3.0)
       .to(el, { opacity: 0, duration: 0.5, ease: 'power2.out' }, 4.0);
   };
+
+  // honour an early tap once everything is ready
+  useEffect(() => { if (art && pending.current) { pending.current = false; open(); } }, [art]);
 
   const sealSVG = (
     <svg viewBox="0 0 200 200" aria-hidden="true">
@@ -128,7 +135,7 @@ export default function Envelope({ onOpen }: { onOpen: () => void }) {
         <div className="card">
           <div className="card-in">
             <span className="k">The wedding of</span>
-            <img src={IMG.couple1} alt="" />
+            <img className={IMG.sketch ? 'sketch' : ''} src={IMG.sketch || IMG.couple1} alt="" />
             <span className="n">Ritu &amp; Suraj<small>Kesarwani</small></span>
             <span className="k">23 · 11 · 2026</span>
           </div>
@@ -142,7 +149,7 @@ export default function Envelope({ onOpen }: { onOpen: () => void }) {
         </div>
         <div className="copy top" aria-hidden="true"><span className="k">You are invited</span><span className="s">Ritu Kesarwani<br />&amp; Suraj Kesarwani</span></div>
         <div className="copy bot"><p>The Kesarwani family invites you<br />to the wedding of their daughter</p><small>Tap the seal · <span className="deva">मुहर खोलें</span></small></div>
-        <button className="seal" type="button" onClick={open} aria-label="Break the seal to open the invitation" disabled={!art}>
+        <button className="seal" type="button" onClick={open} aria-label="Break the seal to open the invitation" aria-busy={!art}>
           <span className="ring" aria-hidden="true" />
           <span className="half h1">{sealFace}</span>
           <span className="half h2">{sealFace}</span>

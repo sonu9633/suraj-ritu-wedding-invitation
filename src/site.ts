@@ -15,6 +15,9 @@ export const IMG = {
   haldi: opt('event-haldi.jpg'),
   vivah: opt('event-vivah.jpg'),
   vidaai: opt('event-vidaai.jpg'),
+  heroArt: opt('hero-art.jpg'),       // illustrated couple in the jharokha (opening screen)
+  finaleArt: opt('finale-art.jpg'),   // couple under the moon at the ghats (closing screen)
+  sketch: opt('couple-sketch.png'),   // gold line portrait (envelope card)
 };
 
 export const WEDDING_START_UTC = Date.UTC(2026, 10, 23, 11, 30); // 23 Nov 2026, 5:00 PM IST
@@ -37,10 +40,10 @@ const HOME_Q = 'Shantinath+Bhavan+Dr+Babasaheb+Ambedkar+Road+Matunga+East+Mumbai
 export const events = [
   {
     key: 'haldi', day: '22', dow: 'Sunday', title: 'Haldi & Mehendi', hindi: 'हल्दी • मेहंदी',
-    time: '8:00 AM to 10:00 PM', note: 'With all the wedding rituals',
+    time: '6:00 PM to 10:00 PM', note: 'Evening of Haldi, Mehendi and all the wedding rituals',
     place: 'Room No. 48, Shantinath Bhavan, Matunga East',
     map: `https://www.google.com/maps/search/?api=1&query=${HOME_Q}`,
-    cal: ['20261122T080000', '20261122T220000'],
+    cal: ['20261122T180000', '20261122T220000'],
   },
   {
     key: 'vivah', day: '23', dow: 'Monday', title: 'Shubh Vivah', hindi: 'शुभ विवाह',
@@ -50,7 +53,7 @@ export const events = [
     cal: ['20261123T170000', '20261124T070000'],
   },
   {
-    key: 'vidaai', day: '24', dow: 'Tuesday', title: 'Vidaai', hindi: 'विदाई',
+    key: 'vidaai', day: '24', dow: 'Tuesday', title: 'Vidai', hindi: 'विदाई',
     time: '7:00 AM', note: 'Farewell to the bride',
     place: 'Uttar Bhavan Hall, BKC',
     map: `https://www.google.com/maps/search/?api=1&query=${HALL_Q}`,
