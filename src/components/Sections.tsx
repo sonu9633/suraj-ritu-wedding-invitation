@@ -71,8 +71,7 @@ export function Invitation() {
         <span className="with" data-rv>with</span>
         <Person who="The groom" p={groom} />
         <Thread />
-        <p className="fixed" data-rv>The wedding is fixed for<br /><b>Monday, 23 November 2026</b></p>
-        <p className="note" data-rv>We humbly request you and your family to come on time and bless the couple. Two homes that share one name, <b>Kesar</b>, are about to share one colour.</p>
+        <p className="note" data-rv>We humbly request you and your family to come on time and bless the couple as they begin their new life together.</p>
       </div>
     </section>
   );
@@ -99,7 +98,7 @@ function Tile({ value, label, onDone }: { value: string; label: string; onDone: 
       x.fillStyle = g; x.fillRect(0, 0, w, h);
       for (let i = 0; i < 160; i++) { x.fillStyle = `rgba(255,255,255,${R(0.08, 0.3)})`; x.fillRect(R(0, w), R(0, h), 1.2, 1.2); }
       x.strokeStyle = 'rgba(255,240,210,.7)'; x.strokeRect(5, 5, w - 10, h - 10);
-      x.fillStyle = 'rgba(90,30,5,.65)'; x.font = '600 11px "Cormorant Garamond", Georgia, serif'; x.textAlign = 'center'; x.fillText('R U B', w / 2, h / 2 + 4);
+      x.fillStyle = 'rgba(90,30,5,.65)'; x.font = '600 11px "Cormorant Garamond", Georgia, serif'; x.textAlign = 'center'; x.fillText('S C R A T C H', w / 2, h / 2 + 4);
     };
     foil();
     const x = cv.getContext('2d')!; let down = false, moved = 0, n = 0;
@@ -119,7 +118,7 @@ function Tile({ value, label, onDone }: { value: string; label: string; onDone: 
   }, []);
   return (
     <div className="tile">
-      <div className="box"><b>{value}</b><canvas ref={ref} className={done ? 'done' : ''} role="button" tabIndex={done ? -1 : 0} aria-label={`Reveal the ${label.toLowerCase()}`} /></div>
+      <div className="box"><b>{value}</b><canvas ref={ref} className={done ? 'done' : ''} role="button" tabIndex={done ? -1 : 0} aria-label={`Scratch to reveal the ${label.toLowerCase()}`} /></div>
       <span>{label}</span>
     </div>
   );
@@ -140,16 +139,16 @@ export function DateReveal() {
     <section className="sec" id="date" aria-labelledby="date-h">
       <div className="col center">
         <span className="label">Save the date</span>
-        <h2 className="h2" id="date-h" data-rv>Reveal <em>the day</em></h2>
-        <p className="lead">Rub each tile like saffron foil</p>
+        <h2 className="h2" id="date-h" data-rv>Scratch <em>to reveal</em></h2>
+        <p className="lead">Scratch all three tiles to start the countdown</p>
         <div className="tiles" ref={tiles}>
           <Tile value="23" label="Day" onDone={hit} />
           <Tile value="11" label="Month" onDone={hit} />
-          <Tile value="26" label="Year" onDone={hit} />
+          <Tile value="2026" label="Year" onDone={hit} />
         </div>
-        <p className={`begins${n >= 3 ? ' bloom' : ''}`}>The celebration begins</p>
-        {c.done ? <p className="begins">The celebrations are on</p> : (
-          <div className="count" aria-label="Time left until the wedding">
+        {n < 3 ? null : <p className="begins bloom">The celebration begins</p>}
+        {n < 3 ? null : c.done ? <p className="begins">The celebrations are on</p> : (
+          <div className="count bloom" aria-label="Time left until the wedding">
             <div><b>{c.d}</b><span>Days</span></div><span className="colon" aria-hidden="true">:</span>
             <div><b>{c.h}</b><span>Hours</span></div><span className="colon" aria-hidden="true">:</span>
             <div><b>{c.m}</b><span>Mins</span></div><span className="colon" aria-hidden="true">:</span>
