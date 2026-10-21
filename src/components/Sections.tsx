@@ -266,6 +266,12 @@ export function Venue() {
         <h2 id="ve-h" data-rv>Uttar Bhavan <em>Hall</em></h2>
         <p className="addr" ref={addr} data-rv>{venue.address}</p>
         <p className="near" data-rv>{venue.near}</p>
+        <div className="mapcard" data-rv>
+          <iframe title="Map showing Uttar Bhavan Hall, BKC, Mumbai" src={venue.embed} loading="lazy" referrerPolicy="no-referrer-when-downgrade" allowFullScreen />
+          <a className="mapchip" href={venue.pin} target="_blank" rel="noopener">Open in Maps
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3H3v10h10v-3M9 3h4v4M13 3 7 9" fill="none" stroke="currentColor" strokeWidth="1.5" /></svg>
+          </a>
+        </div>
         <div className="row" data-rv>
           <a className="btn solid" target="_blank" rel="noopener" href={venue.directions}><span className="fill" aria-hidden="true" />Get directions<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" strokeWidth="1.6" /></svg></a>
           <button className="btn" type="button" onClick={copy}><span className="fill" aria-hidden="true" />Copy address</button>

@@ -66,6 +66,8 @@ export const venue = {
   address: 'Uttar Bhartiya Seva Sangh, Teachers Colony Road, Bandra Kurla Complex, Bandra East, Mumbai 400051',
   near: 'Closest station: Bandra Colony Underground Metro, BKC',
   directions: `https://www.google.com/maps/dir/?api=1&destination=${HALL_Q}`,
+  pin: 'https://share.google/eRkWXeEXbZ4CO7C2M', // the family's own Google Maps link to the hall
+  embed: 'https://maps.google.com/maps?q=' + encodeURIComponent('Uttar Bhartiya Sangh, Teachers Colony, Bandra Kurla Complex, Bandra East, Mumbai 400051') + '&z=16&output=embed',
 };
 
 export const homes = [

@@ -275,3 +275,13 @@ main { position: relative; z-index: 1; overflow-x: clip }
 .finale.painted .in { padding-top: clamp(64px, 10vh, 110px); gap: 14px }
 .finale.painted .nm { font-size: clamp(56px, 15vw, 104px) }
 .finale.painted .wait { position: relative; margin-top: 52vh; text-shadow: 0 2px 12px rgba(0, 0, 0, .7) }
+
+/* venue map, framed like a printed card */
+.mapcard { position: relative; width: 100%; aspect-ratio: 4/3.4; border-radius: 14px; overflow: hidden; background: #EFE6D6;
+  box-shadow: 0 0 0 1px rgba(201, 154, 69, .7), 0 0 0 6px var(--ground), 0 0 0 7px rgba(201, 154, 69, .45), 0 26px 44px -26px rgba(60, 20, 10, .55) }
+.mapcard iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; filter: sepia(.2) saturate(.95) }
+.mapchip { position: absolute; left: 12px; top: 12px; display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 8px 14px; border-radius: 999px;
+  background: rgba(255, 253, 248, .96); color: var(--kesar-ink); font: 600 13px/1 var(--serif); letter-spacing: .14em; text-transform: uppercase; text-decoration: none;
+  box-shadow: 0 6px 16px -8px rgba(60, 20, 10, .5); transition: transform .3s var(--out), box-shadow .3s var(--out) }
+.mapchip svg { width: 14px; height: 14px }
+@media (hover:hover) { .mapchip:hover { transform: translateY(-2px); box-shadow: 0 10px 20px -8px rgba(60, 20, 10, .55) } }
